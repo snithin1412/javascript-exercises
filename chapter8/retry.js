@@ -12,14 +12,13 @@ function primitiveMultiply(a, b) {
 }
 
 function reliableMultiply(a, b) {
-    for (;;) {
         try {
           return primitiveMultiply(a, b);
         } 
         catch (e) {
-          if (!(e instanceof MultiplicatorUnitFailure)) throw e;
+          if (e instanceof MultiplicatorUnitFailure) return reliableMultiply(a, b);
+          else throw e;
         }
-    }
 }
 
 console.log(reliableMultiply(8, 8));
